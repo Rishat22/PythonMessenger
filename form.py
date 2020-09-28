@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
                                      border: 10px solid #98514b;\n
                                      border-radius: 16px;\n
                                      padding: 10px;\n
-                                     background-image: url("my_messenger_logo.png");\n
+                                     border-image: url("my_messenger_logo.png");\n
                                  }""")
         self.frame.setFrameShape(QtWidgets.QFrame.Box)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
