@@ -82,15 +82,33 @@ class Ui_RegistrationWindow(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem3)
-        self.pushButton_2 = QtWidgets.QPushButton(RegistrationWindow)
-        self.pushButton_2.setMinimumSize(QtCore.QSize(100, 25))
-        self.pushButton_2.setBaseSize(QtCore.QSize(35, 20))
+        self.registrationButton = QtWidgets.QPushButton(RegistrationWindow)
+        self.registrationButton.setMinimumSize(QtCore.QSize(100, 25))
+        self.registrationButton.setBaseSize(QtCore.QSize(35, 20))
         font = QtGui.QFont()
         font.setFamily("STIXGeneral")
         font.setBold(False)
         font.setWeight(50)
-        self.pushButton_2.setFont(font)
-        self.pushButton_2.setStyleSheet("QPushButton{ \n"
+        self.registrationButton.setFont(font)
+        self.registrationButton.setStyleSheet("QPushButton{ \n"
+                                              "color: #f4f6ec;\n"
+                                              "background-color: #ac0e28;\n"
+                                              "border-radius: 10px;\n"
+                                              "border: none;\n"
+                                              " }\n"
+                                              "QPushButton:focus:pressed { color:#2d0c03;  }\n"
+                                              "QPushButton:hover {  background-color: #bc4558; }")
+        self.registrationButton.setObjectName("pushButton_2")
+        self.horizontalLayout.addWidget(self.registrationButton)
+        self.cancelButton = QtWidgets.QPushButton(RegistrationWindow)
+        self.cancelButton.setMinimumSize(QtCore.QSize(100, 25))
+        self.cancelButton.setBaseSize(QtCore.QSize(35, 20))
+        font = QtGui.QFont()
+        font.setFamily("STIXGeneral")
+        font.setBold(False)
+        font.setWeight(50)
+        self.cancelButton.setFont(font)
+        self.cancelButton.setStyleSheet("QPushButton{ \n"
                                         "color: #f4f6ec;\n"
                                         "background-color: #ac0e28;\n"
                                         "border-radius: 10px;\n"
@@ -98,26 +116,8 @@ class Ui_RegistrationWindow(object):
                                         " }\n"
                                         "QPushButton:focus:pressed { color:#2d0c03;  }\n"
                                         "QPushButton:hover {  background-color: #bc4558; }")
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout.addWidget(self.pushButton_2)
-        self.pushButton = QtWidgets.QPushButton(RegistrationWindow)
-        self.pushButton.setMinimumSize(QtCore.QSize(100, 25))
-        self.pushButton.setBaseSize(QtCore.QSize(35, 20))
-        font = QtGui.QFont()
-        font.setFamily("STIXGeneral")
-        font.setBold(False)
-        font.setWeight(50)
-        self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("QPushButton{ \n"
-                                      "color: #f4f6ec;\n"
-                                      "background-color: #ac0e28;\n"
-                                      "border-radius: 10px;\n"
-                                      "border: none;\n"
-                                      " }\n"
-                                      "QPushButton:focus:pressed { color:#2d0c03;  }\n"
-                                      "QPushButton:hover {  background-color: #bc4558; }")
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout.addWidget(self.pushButton)
+        self.cancelButton.setObjectName("pushButton")
+        self.horizontalLayout.addWidget(self.cancelButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
         spacerItem4 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.verticalLayout.addItem(spacerItem4)
@@ -131,7 +131,9 @@ class Ui_RegistrationWindow(object):
         RegistrationWindow.setWindowTitle(_translate("RegistrationWindow", "Registration Window"))
         self.label_2.setText(_translate("RegistrationWindow", "Fill in the registration fields:"))
         self.label.setText(_translate("RegistrationWindow", "Name of Login:"))
-        self.pushButton_2.setText(_translate("RegistrationWindow", "Register"))
-        self.pushButton.setText(_translate("RegistrationWindow", "Cancel"))
+        self.registrationButton.setText(_translate("RegistrationWindow", "Register"))
+        self.cancelButton.setText(_translate("RegistrationWindow", "Cancel"))
 
-
+        # buttons logic
+        self.cancelButton.clicked.connect(RegistrationWindow.close)
+        # self.registrationButton.clicked.connect(self.register_user)

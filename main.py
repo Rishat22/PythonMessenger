@@ -16,7 +16,13 @@ if __name__ == "__main__":
 
     # init
     Dialog = QtWidgets.QDialog()
-    Dialog.setWindowFlags(QtCore.Qt.Window)
+    Dialog.setWindowFlags(
+        QtCore.Qt.Window |
+        QtCore.Qt.CustomizeWindowHint |
+        QtCore.Qt.WindowTitleHint |
+        QtCore.Qt.WindowMinimizeButtonHint |
+        QtCore.Qt.WindowCloseButtonHint
+        )
     widget = Ui_MainWindow()
     widget.setupUi(Dialog)
     Dialog.setWindowTitle("The best messenger!")

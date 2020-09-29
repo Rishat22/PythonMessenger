@@ -13,14 +13,14 @@ from registration_window import Ui_RegistrationWindow
 from PySide2.QtWidgets import QApplication
 
 class Ui_MainWindow(object):
-    def setupUi(self, ClientMessenger):
-        ClientMessenger.setObjectName("ClientMessenger")
-        ClientMessenger.resize(784, 608)
-        ClientMessenger.setStyleSheet("")
-        self.verticalLayout = QtWidgets.QVBoxLayout(ClientMessenger)
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(780, 600)
+        MainWindow.setStyleSheet("")
+        self.verticalLayout = QtWidgets.QVBoxLayout(MainWindow)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.frame = QtWidgets.QFrame(ClientMessenger)
-        ClientMessenger.setStyleSheet("QWidget{ background-color: #2d0c03; }")
+        self.frame = QtWidgets.QFrame(MainWindow)
+        MainWindow.setStyleSheet("QWidget{ background-color: #2d0c03; }")
         self.frame.setStyleSheet("""QFrame{\n
                                      border: 10px solid #98514b;\n
                                      border-radius: 16px;\n
@@ -85,15 +85,11 @@ class Ui_MainWindow(object):
         self.loginButton.setAutoDefault(False)
         self.loginButton.setObjectName("loginButton")
 
-        # buttons logic
-        self.loginButton.clicked.connect(self.open_login_window)
-        self.registrationButton.clicked.connect(self.open_registration_window)
-
         self.horizontalLayout.addWidget(self.loginButton)
         self.verticalLayout.addWidget(self.frame)
 
-        self.retranslateUi(ClientMessenger)
-        QtCore.QMetaObject.connectSlotsByName(ClientMessenger)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def open_registration_window(self):
         self.registration_window = QtWidgets.QWidget()
@@ -119,8 +115,12 @@ class Ui_MainWindow(object):
                                       center_point.y() - self.registration_window.height())
         self.registration_window.show()
 
-    def retranslateUi(self, ClientMessenger):
+    def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        ClientMessenger.setWindowTitle(_translate("ClientMessenger", "ClientMessenger"))
-        self.registrationButton.setText(_translate("ClientMessenger", "Registration"))
-        self.loginButton.setText(_translate("ClientMessenger", "Login"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.registrationButton.setText(_translate("MainWindow", "Registration"))
+        self.loginButton.setText(_translate("MainWindow", "Login"))
+
+        # buttons logic
+        self.loginButton.clicked.connect(self.open_login_window)
+        self.registrationButton.clicked.connect(self.open_registration_window)
