@@ -9,8 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QPixmap, QPalette, QBrush
-
+from registration_window import Ui_RegistrationWindow
+from PySide2.QtWidgets import QApplication
 
 class Ui_MainWindow(object):
     def setupUi(self, ClientMessenger):
@@ -20,10 +20,12 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(ClientMessenger)
         self.verticalLayout.setObjectName("verticalLayout")
         self.frame = QtWidgets.QFrame(ClientMessenger)
+        ClientMessenger.setStyleSheet("QWidget{ background-color: #2d0c03; }")
         self.frame.setStyleSheet("""QFrame{\n
                                      border: 10px solid #98514b;\n
                                      border-radius: 16px;\n
                                      padding: 10px;\n
+                                     background-color: #f4f6ec;\n
                                      border-image: url("my_messenger_logo.png");\n
                                  }""")
         self.frame.setFrameShape(QtWidgets.QFrame.Box)
@@ -82,11 +84,40 @@ class Ui_MainWindow(object):
         self.loginButton.setAutoRepeatDelay(300)
         self.loginButton.setAutoDefault(False)
         self.loginButton.setObjectName("loginButton")
+
+        # buttons logic
+        self.loginButton.clicked.connect(self.open_login_window)
+        self.registrationButton.clicked.connect(self.open_registration_window)
+
         self.horizontalLayout.addWidget(self.loginButton)
         self.verticalLayout.addWidget(self.frame)
 
         self.retranslateUi(ClientMessenger)
         QtCore.QMetaObject.connectSlotsByName(ClientMessenger)
+
+    def open_registration_window(self):
+        self.registration_window = QtWidgets.QWidget()
+        registration_widget = Ui_RegistrationWindow()
+        registration_widget.setupUi(self.registration_window)
+        self.registration_window.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        self.registration_window.adjustSize()
+        screen = QApplication.desktop().screenNumber(QApplication.desktop().cursor().pos())
+        center_point = QApplication.desktop().screenGeometry(screen).center()
+        self.registration_window.move(center_point.x() - self.registration_window.width(),
+                                      center_point.y() - self.registration_window.height())
+        self.registration_window.show()
+
+    def open_login_window(self):
+        self.registration_window = QtWidgets.QWidget()
+        registration_widget = Ui_RegistrationWindow()
+        registration_widget.setupUi(self.registration_window)
+        self.registration_window.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        self.registration_window.adjustSize()
+        screen = QApplication.desktop().screenNumber(QApplication.desktop().cursor().pos())
+        center_point = QApplication.desktop().screenGeometry(screen).center()
+        self.registration_window.move(center_point.x() - self.registration_window.width(),
+                                      center_point.y() - self.registration_window.height())
+        self.registration_window.show()
 
     def retranslateUi(self, ClientMessenger):
         _translate = QtCore.QCoreApplication.translate
