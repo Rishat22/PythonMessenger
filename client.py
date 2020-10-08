@@ -1,10 +1,13 @@
 import socket, threading, time
 from Crypto.Cipher import DES
 
+# ToDo move to global parameters
 ENCODING_FORMAT = "utf-8"
 SERVER_PORT = 9090
-SERVER_ADDRESS = "192.168.0.101"
+SERVER_ADDRESS = "127.0.0.1"
+# end
 
+# ToDo move class parameters
 key = b'abcdefgh'
 shutdown = False
 join = False
@@ -22,8 +25,11 @@ def receiving(name, sock):
             while True:
                 data, addr = sock.recvfrom(1024)
                 data = data.decode(ENCODING_FORMAT)
+                # ToDo move to encryption class
+                data = data.split(" => ", 1)
                 des = DES.new(key, DES.MODE_ECB)
-                decrypted_text = des.decrypt(data)
+                decrypted_text = des.decrypt(data[1])
+                # end
                 print(decrypted_text)
         except:
             pass
@@ -39,3 +45,23 @@ client_socket.setblocking(0)
 alias = input("Name: ")
 receiving_thread = threading.Thread(target=receiving, args=("RecvThread", client_socket))
 receiving_thread.start()
+
+while not shutdown:
+    if not join:
+        client_socket.sendto(("[{0}] => join chat".format(alias)).encode(ENCODING_FORMAT), server)
+        join = True
+    else:
+        try:
+            message = input().encode(ENCODING_FORMAT)
+            # ToDo move to encryption class
+            des = DES.new(key, DES.MODE_ECB)
+            padded_message = fill_multiple_eight(message)
+            encrypted_text = des.encrypt(padded_message)
+            # end
+
+            if message != "":
+                client_socket.sendto(("[{0}] :: {1}".format(alias, encrypted_text)).encode(ENCODING_FORMAT), server)
+        except:
+            client_socket.sendto(("[{0}] => left chat".format(alias)).encode(ENCODING_FORMAT), server)
+receiving_thread.join()
+client_socket.close()

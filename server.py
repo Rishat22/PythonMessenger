@@ -1,15 +1,15 @@
 import socket, time
 
+# ToDo move to global parameters
 ENCODING_FORMAT = "utf-8"
+SERVER_PORT = 9090
+SERVER_ADDRESS = "127.0.0.1"
 
 host = socket.gethostbyname(socket.gethostname())
-
-port = 9090
-
 clients = []
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server_socket.bind((host, port))
+server_socket.bind((SERVER_ADDRESS, SERVER_PORT))
 
 quit_server = False
 print("[ Server Started ]")
