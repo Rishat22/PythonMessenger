@@ -1,15 +1,11 @@
 import socket, time
-
-# ToDo move to global parameters
-ENCODING_FORMAT = "utf-8"
-SERVER_PORT = 9090
-SERVER_ADDRESS = "127.0.0.1"
+import settings
 
 host = socket.gethostbyname(socket.gethostname())
 clients = []
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server_socket.bind((SERVER_ADDRESS, SERVER_PORT))
+server_socket.bind((settings.SERVER_ADDRESS, settings.SERVER_PORT))
 
 quit_server = False
 print("[ Server Started ]")
@@ -24,7 +20,7 @@ while not quit_server:
         current_time = time.strftime("%Y-%m-%d-%H.%M.%S", time.localtime())
 
         print("[{0}]=[{1}]=[{2}]/".format(addr[0], str(addr[1]), current_time), end="")
-        print(data.decode(ENCODING_FORMAT))
+        print(data.decode(settings.ENCODING_FORMAT))
 
         for client in clients:
             if addr != client:
