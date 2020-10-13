@@ -39,10 +39,10 @@ class ClientTransceiver:
                 self.join = True
             else:
                 try:
-                    message = input().encode(settings.ENCODING_FORMAT)
-                    message = "[{0}] :: {1}".format(nickname, message)
-                    encrypted_text = self.message_encryptor.encrypt(message)
+                    message = input()
                     if message != "":
+                        message = "[{0}] :: {1}".format(nickname, message)
+                        encrypted_text = self.message_encryptor.encrypt(message)
                         client_socket.sendto(encrypted_text.encode(settings.ENCODING_FORMAT), server)
                 except:
                     client_socket.sendto(("[{0}] => left chat".format(nickname)).encode(settings.ENCODING_FORMAT),

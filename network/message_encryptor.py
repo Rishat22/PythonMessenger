@@ -20,6 +20,6 @@ class MessageEncryptor(object):
         if message.find(" :: ") == -1:
             return message
         message_list = message.split(" :: ", 1)
-        decrypted_message = self.fernet.decrypt(message_list[1].encode(settings.ENCODING_FORMAT))
+        decrypted_message = self.fernet.decrypt(message_list[1].encode())
         decrypted_message = "{0} :: {1}".format(message_list[0], decrypted_message.decode(settings.ENCODING_FORMAT))
         return decrypted_message
